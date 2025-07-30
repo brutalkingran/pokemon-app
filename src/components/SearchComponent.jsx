@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import { useState } from 'react';
+import SearchForm from './SearchForm.jsx';
+import PokemonList from './PokemonList.jsx';
 
 const SearchComponent = () => {
   const [inputSearch, setInputSearch] = useState([])
@@ -6,7 +8,7 @@ const SearchComponent = () => {
   return (
     <div>
       <SearchForm/>
-      <CharacterList searchData={inputSearch}/>
+      <PokemonList searchData={inputSearch}/>
     </div>
   )
 }

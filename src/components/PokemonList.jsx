@@ -1,8 +1,10 @@
-import React from 'react'
+import PokemonCard from './PokemonCard.jsx';
 
 const PokemonList = () => {
+  
+
   return (
-    <div>
+    <div className='flex m-2'>
       <PokemonCard/>
     </div>
   )

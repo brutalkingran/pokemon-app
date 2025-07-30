@@ -4,7 +4,7 @@ const { Search } = Input;
 
 const SearchForm = () => (
   <>
-    <Search placeholder="input search loading with enterButton" loading enterButton />
+    <Search placeholder="Ingresa el nombre de un Pokémon..." loading enterButton />
   </>
 );
 
