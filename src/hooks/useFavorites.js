@@ -1,29 +1,35 @@
 import { useContext } from "react";
 import { FavoritesContext } from "../context/FavoritesContext";
+import { toast } from 'react-toastify';
 
 const useFavorites = () => {
   const { favorites, setFavorites } = useContext(FavoritesContext);
 
   // AÑADIR
   const addFavorites = ( pokemon ) => { // Añade primer pokemon
-    const exists = isInFavorites( pokemon.id );
 
     if (!pokemon?.id) {
-      console.warn("Intentaste agregar un Pokémon inválido.");
+      toast.warn("Intentaste agregar un Pokémon inválido.");
       return;
     }
-    
-    if (exists) {
-      alert("Este Pokémon ya está en tu equipo.");
+
+    if (isInFavorites(pokemon.id)) {
+      toast.info("Este Pokémon ya está en tu equipo.");
       return;
     }
 
     if (isLimitExceeded()) {
-      alert("Solo puedes tener 6 Pokémon en tu equipo.");
+      toast.error("Solo puedes tener 6 Pokémon en tu equipo.");
+      return;
+    }
+
+    if (isInFavorites( pokemon.id )) {
+      toast.error("Este Pokémon ya existe.");
       return;
     }
     
-    !exists && setFavorites([...favorites, pokemon]);
+    setFavorites([...favorites, pokemon]);
+    toast.success(`${pokemon.name.toUpperCase()} fue añadido a tu equipo`);
   }
   
   // LIMIT EXCEEDED
@@ -31,7 +37,13 @@ const useFavorites = () => {
 
   // REMOVE PRODUCT
   const removeFavorites = ( id ) => {
+    if (!isInFavorites( id )) {
+      toast.error("Pokémon con id inválido.");
+      return;
+    }
+
     setFavorites( favorites.filter(fav => fav.id !== id )); // mantiene todos los items excepto los del id a eliminar
+    toast.info(`Pokémon removido del equipo con éxito.`);
   };
 
   // CLEAR

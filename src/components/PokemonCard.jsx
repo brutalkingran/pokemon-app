@@ -60,7 +60,7 @@ const PokemonCard = ({ pokeData = null, dataFull = null }) => {
               ?
                 <button onClick={ () => addFavorites(pokemonData) } className="p-1 cursor-pointer border border-red-400">Equipo +</button>
               :
-                <button onClick={ () => removeFavorites(pokemonData) } className="p-1 cursor-pointer border border-red-400">Equipo -</button>
+                <button onClick={ () => removeFavorites(pokemonData.id) } className="p-1 cursor-pointer border border-red-400">Equipo -</button>
             }
           </div>
       }
