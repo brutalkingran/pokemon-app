@@ -4,7 +4,6 @@ import FooterComponent from "./components/FooterComponent";
 import { ToastContainer, Bounce } from 'react-toastify';
 
 const App = () => {
-  
   return (
     <>
       <HeaderComponent/>

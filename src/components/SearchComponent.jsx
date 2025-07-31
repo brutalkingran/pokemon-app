@@ -13,13 +13,20 @@ const SearchComponent = () => {
   }
 
   return (
-    <div>
-      <SearchForm onSearch={handleSearch}/>
-      {
-        inputSearch != '' && <PokemonList searchData={inputSearch}/>
-      }
+    <div className='w-full flex flex-col items-center'>
+      {/* Buscador centrado */}
+      <div className='w-full max-w-xl mb-6'>
+        <SearchForm onSearch={handleSearch} />
+      </div>
+
+      {/* Resultados centrados en layout amplio */}
+      {inputSearch !== '' && (
+        <div className='w-full'>
+          <PokemonList searchData={inputSearch} />
+        </div>
+      )}
     </div>
-  )
+  );
 }
 
 export default SearchComponent

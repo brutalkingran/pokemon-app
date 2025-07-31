@@ -13,33 +13,35 @@ const MainComponent = () => {
   }
 
   return (
-    <main className='h-9/10 p-2'>
+    <main className='min-h-screen'>
       {/* SEARCH */}
-      <div className='flex flex-col'>
-        <div className='flex flex-row justify-around'>
-          <h2 className='text-2xl'>Búsqueda</h2>
-          <button>aaaaaa</button>
+      <section className='p-4 m-2'>
+        <div className='flex flex-row justify-around items-center m-5'>
+          <h2 className='text-2xl mr-10'>Búsqueda</h2>
+          <h2></h2>
         </div>
-        <SearchComponent/>
-      </div>
+        <div className='flex justify-center'>
+          <SearchComponent />
+        </div>
+      </section>
 
       {/* RANDOM SEARCH */}
-      <div className='flex flex-col'>
-        <div className='flex flex-row justify-around'>
+      <section className='flex flex-col m-2'>
+        <div className='flex flex-row justify-around m-5'>
           <h2 className='text-2xl'>Lista Aleatoria</h2>
-          <button onClick={ handleRandomize }>Generar de nuevo</button>
+          <button onClick={ handleRandomize } className='bg-amber-300 p-1 rounded text-white cursor-pointer'>Generar de nuevo</button>
         </div>
-        <PokemonList randomizeNow={() => handleRandomize}/>
-      </div>
+        <PokemonList randomizeNow={randomTrigger}/>
+      </section>
 
       {/* FAVORITES */}
-      <div className='flex flex-col'>
-        <div className='flex flex-row justify-around'>
-          <h2 className='text-2xl'>Tu equipo Pokémon [{ !totalFavorites() ? 0 : totalFavorites() }]</h2>
-          <button onClick={() => clearFavorites()}>Borrar todos</button>
+      <section className='flex flex-col m-2'>
+        <div className='flex flex-row justify-around m-5'>
+          <h2 className='text-2xl'>Tu equipo [{ !totalFavorites() ? 0 : totalFavorites() }]</h2>
+          <button onClick={() => clearFavorites() } className='rounded bg-red-500 text-white p-1 cursor-pointer'>Borrar todos</button>
         </div>
         <FavoriteList/>
-      </div>
+      </section>
     </main>
   )
 }

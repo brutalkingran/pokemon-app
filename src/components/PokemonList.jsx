@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { ClipLoader } from 'react-spinners'; 
 import PokemonCard from './PokemonCard.jsx';
 import axios from 'axios';
 
@@ -23,6 +24,7 @@ const PokemonList = ({ searchData = '', randomizeNow }) => {
           el.name.toLowerCase().includes(normalizedSearch)
         ).slice(0, 19);
 
+
       } else {
         // Random list
         filteredResults = results.sort(() => Math.random() - 0.5).slice(0, 19);
@@ -41,16 +43,23 @@ const PokemonList = ({ searchData = '', randomizeNow }) => {
   }, [searchData, randomizeNow])
 
   return (
-    <div className='flex m-2 flex-wrap'>
-      { loading && <p>Cargando...</p> }
-
-      {
-        pokemonData.length === 0
-          ? <p>No se encontraron resultados</p>
-          : pokemonData.map((pokemon, key) => <PokemonCard key = {key} pokeData = {pokemon}/>)
-      }
+    <div className='container mx-auto px-1 w-full'>
+      {loading && (
+        <div className="flex justify-center items-center my-8">
+          <ClipLoader size={50} color="#36d7b7" />
+        </div>
+      )}
 
       { error && <p>Error: {error} </p> }
+
+      {
+        <div className='flex flex-wrap justify-center gap-4'>
+          {pokemonData.map((pokemon, key) => (
+            <PokemonCard key={key} pokeData={pokemon} />
+          ))}
+        </div>
+      }
+
     </div>
   )
 }
