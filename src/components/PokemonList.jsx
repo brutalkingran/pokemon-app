@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import PokemonCard from './PokemonCard.jsx';
 import axios from 'axios';
 
-const PokemonList = () => {
+const PokemonList = ({ searchData = '', randomizeNow }) => {
   const [pokemonData, setPokemonData] = useState([]);
   const [loading, setLoading] = useState( false );
   const [error, setError] = useState( null );
@@ -13,10 +13,22 @@ const PokemonList = () => {
 
     try {
       const { data } = await axios.get(`${import.meta.env.VITE_BASE_URL}pokemon?limit=10000&offset=0`);
-      const randomized_data = data.results.sort(() => Math.random() - 0.5);
-      const limit_data = randomized_data.slice(0,19)
-      
-      setPokemonData( limit_data );
+      const results = data.results;
+
+      let filteredResults;
+
+      if (searchData) {
+        const normalizedSearch = searchData.toLowerCase().trim();
+        filteredResults = results.filter((el) =>
+          el.name.toLowerCase().includes(normalizedSearch)
+        ).slice(0, 19);
+
+      } else {
+        // Random list
+        filteredResults = results.sort(() => Math.random() - 0.5).slice(0, 19);
+      }
+
+      setPokemonData(filteredResults);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -26,14 +38,16 @@ const PokemonList = () => {
 
   useEffect(() => {
     fetchPokeApi();
-  }, [])
+  }, [searchData, randomizeNow])
 
   return (
     <div className='flex m-2 flex-wrap'>
       { loading && <p>Cargando...</p> }
 
       {
-        pokemonData.map((pokemon, key) => <PokemonCard key = {key} pokeData = {pokemon}/>)
+        pokemonData.length === 0
+          ? <p>No se encontraron resultados</p>
+          : pokemonData.map((pokemon, key) => <PokemonCard key = {key} pokeData = {pokemon}/>)
       }
 
       { error && <p>Error: {error} </p> }

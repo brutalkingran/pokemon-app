@@ -3,12 +3,21 @@ import SearchForm from './SearchForm.jsx';
 import PokemonList from './PokemonList.jsx';
 
 const SearchComponent = () => {
-  const [inputSearch, setInputSearch] = useState([])
+  const [inputSearch, setInputSearch] = useState('')
+
+  const handleSearch = (value) => {
+    const normalizedSearch = typeof value === 'string' ? value.toLowerCase().trim() : '';
+    if (normalizedSearch) {
+      setInputSearch(normalizedSearch);
+    }
+  }
 
   return (
     <div>
-      <SearchForm/>
-      <PokemonList searchData={inputSearch}/>
+      <SearchForm onSearch={handleSearch}/>
+      {
+        inputSearch != '' && <PokemonList searchData={inputSearch}/>
+      }
     </div>
   )
 }

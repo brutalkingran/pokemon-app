@@ -2,9 +2,14 @@ import { Input } from 'antd';
 
 const { Search } = Input;
 
-const SearchForm = () => (
+const SearchForm = ({ onSearch }) => (
   <>
-    <Search placeholder="Ingresa el nombre de un Pokémon..." loading enterButton />
+    <Search
+      placeholder="Ingresa el nombre de un Pokémon..."
+      // loading
+      enterButton
+      onSearch={onSearch}
+    />
   </>
 );
 
