@@ -43,7 +43,7 @@ const PokemonCard = ({ pokeData = null, dataFull = null }) => {
 
       {
         pokemonData &&
-          <div className="group p-1 border-1 border-palette-light-300 m-1 mb-3 bg-white dark:bg-black dark:border-white rounded-lg shadow-md overflow-hidden hover:shadow-lg w-60 sm:w-64 md:w-72 lg:w-80 xl:w-80 2xl:w-96 flex flex-col items-center justify-between">
+          <div className="group p-1 border-1 border-palette-light-300 m-1 mb-3 bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg w-60 sm:w-64 md:w-72 lg:w-80 xl:w-80 2xl:w-96 flex flex-col items-center justify-between">
             <div className="w-[120px] h-[120px] mx-auto">
               <img
                 src={pokemonData.sprites?.other?.showdown?.front_default ?? pokemonData.sprites.front_default}
