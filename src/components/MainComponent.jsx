@@ -1,16 +1,20 @@
 import SearchComponent from './SearchComponent';
 import PokemonList from './PokemonList';
+import FavoriteList from './FavoriteList';
+import useFavorites from '../hooks/useFavorites';
 
 const MainComponent = () => {
+  const { favorites, totalFavorites, clearFavorites } = useFavorites();
+
   return (
-    <main className='h-9/10'>
+    <main className='h-9/10 p-2'>
       {/* SEARCH */}
       <div className='flex flex-col'>
         <div className='flex flex-row justify-around'>
           <h2 className='text-2xl'>Búsqueda</h2>
           <button>aaaaaa</button>
         </div>
-        <SearchComponent/>
+        {/* <SearchComponent/> */}
       </div>
 
       {/* RANDOM SEARCH */}
@@ -22,13 +26,13 @@ const MainComponent = () => {
         <PokemonList/>
       </div>
 
-      {/* FAVORITE SEARCH */}
+      {/* FAVORITES */}
       <div className='flex flex-col'>
         <div className='flex flex-row justify-around'>
-          <h2 className='text-2xl'>Tus Pokémon favoritos</h2>
-          <button>   aaaaa</button>
+          <h2 className='text-2xl'>Tu equipo Pokémon [{ !totalFavorites() ? 0 : totalFavorites() }]</h2>
+          <button onClick={() => clearFavorites()}>Borrar todos</button>
         </div>
-        <PokemonList type="favorites"/>
+        <FavoriteList/>
       </div>
     </main>
   )

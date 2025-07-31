@@ -5,8 +5,9 @@ export const FavoritesContext = createContext();
 
 // 2. crear provider
 export const FavoritesProvider = ({ children }) => { // 'children' son los elementos hijos que se colocan dentro del componente en el JSX.
-  const [favorites, setFavorites] = useState(getInitialFavorites);
-
+  const [ favorites, setFavorites ] = useState(getInitialFavorites);
+  console.log(favorites);
+  
   // Guardar en localStorage
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));

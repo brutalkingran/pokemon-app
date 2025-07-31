@@ -5,8 +5,14 @@
 
 @theme {}
 
-@layer base {
+@font-face {
+  font-family: 'PokemonPixel';
+  src: url('./assets/pokemon_pixel_font.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
 
+@layer base {
   *,
   *::before,
   *::after {
@@ -17,9 +23,5 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
-
-  html {
-    font-family: sans-serif;
   }
 }

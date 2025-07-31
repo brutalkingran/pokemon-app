@@ -1,23 +1,33 @@
 import { useContext } from "react";
 import { FavoritesContext } from "../context/FavoritesContext";
 
-const useCart = () => {
+const useFavorites = () => {
   const { favorites, setFavorites } = useContext(FavoritesContext);
 
   // AÑADIR
-  const addItem = ( item ) => { // Añade primer producto
-    const exists = cart.find(pokemon => pokemon.id === fav.id); // búsqueda
+  const addFavorites = ( pokemon ) => { // Añade primer pokemon
+    const exists = isInFavorites( pokemon.id );
 
-    if (exists) {
-      setCart(cart.map(prod =>
-        pokemon.id === fav.id
-          ? { ...pokemon, quantity: prod.quantity + 1 } // crea el atributo quantity
-          : pokemon
-      ));
-    } else {
-      setCart([...favorites, { ...fav, quantity: 1 }]);
+    if (!pokemon?.id) {
+      console.warn("Intentaste agregar un Pokémon inválido.");
+      return;
     }
-  };
+    
+    if (exists) {
+      alert("Este Pokémon ya está en tu equipo.");
+      return;
+    }
+
+    if (isLimitExceeded()) {
+      alert("Solo puedes tener 6 Pokémon en tu equipo.");
+      return;
+    }
+    
+    !exists && setFavorites([...favorites, pokemon]);
+  }
+  
+  // LIMIT EXCEEDED
+  const isLimitExceeded = () => favorites.length >= 6;
 
   // REMOVE PRODUCT
   const removeFavorites = ( id ) => {
@@ -29,12 +39,19 @@ const useCart = () => {
     setFavorites([]);
   };
 
+  // COUNT EVERY POKEMON
+  const totalFavorites = () => favorites.length;
+
+  // IS IN FAVORITES
+  const isInFavorites = (id) => favorites.find((fav) => fav.id === id);
+
   return {
-    cart,
+    favorites,
     addFavorites,
     removeFavorites,
     clearFavorites,
-    total
+    totalFavorites,
+    isInFavorites
   };
 };
 
