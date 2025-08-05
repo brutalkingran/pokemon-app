@@ -11,4 +11,4 @@
 
 ## Despliegue en Netlify
 
-[pokeapp.netlify.app/](https://cartx-store.netlify.app/)
+[https://pocketmonsterapp.netlify.app/](https://pocketmonsterapp.netlify.app/)
